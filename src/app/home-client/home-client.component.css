@@ -1,0 +1,22 @@
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 3em;
+}
+
+h4 {
+    text-align: center;
+}
+
+.content {
+    line-height: 400px;
+    margin: 0px auto;
+    text-align: center;
+    background-color: #fff;
+}
+
+.content img {
+    vertical-align: middle;
+    width: 100%;
+}

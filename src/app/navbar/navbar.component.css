@@ -1,0 +1,24 @@
+.Menu-title {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.Menu-enlaces {
+    margin-left: 2%;
+}
+
+.Menu-enlaces .Enlace-navbar {
+    text-decoration: none;
+    background-color: white;
+    padding: 0.5em;
+    border-radius: 8px;
+    color: #3f51b5;
+    cursor: pointer;
+    margin-right: 2%;
+}
+
+.Menu-enlaces .Enlace-navbar:hover {
+    background-color: #b3bbe6;
+    color: white;
+}
