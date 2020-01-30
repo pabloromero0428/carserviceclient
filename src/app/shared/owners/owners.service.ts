@@ -7,17 +7,18 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class OwnersService {
-
   public API = '//thawing-chamber-47973.herokuapp.com';
   public OWNERS_API = this.API + '/owners';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
+  dataOwners: any = [];
 
   getOWNERS(): Observable<any> {
-    return this.http.get(this.API + this.OWNERS_API).pipe(map(data => {
-      console.log(data);
-    }));
-  }
+    return this.http.get(this.OWNERS_API).pipe(
+      map((data: any) => {
+        return data._embedded.owners;
 
+      })
+    );
+  }
 }

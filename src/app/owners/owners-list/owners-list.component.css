@@ -1,0 +1,20 @@
+.example-card {
+    max-width: 400px;
+    margin: 2%;
+    padding: 2em;
+}
+
+.Contenedores-Propi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.button-ac {
+    cursor: pointer;
+}
