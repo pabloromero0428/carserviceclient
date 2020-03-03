@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OwnersService } from '../../shared/owners/owners.service';
 
 @Component({
   selector: 'app-owners-create',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnersCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor( private ownerServices: OwnersService ) { 
+    this.ownerServices.getOWNERS();
+  }
 
   ngOnInit() {
   }
