@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
 import { from } from 'rxjs';
 import { OwnersService } from '../../shared/owners/owners.service';
 
@@ -12,7 +13,8 @@ export class OwnersListComponent implements OnInit {
 
 
   OwnersUsers: any[] = [];
-  OwnerForID: any[] = [];
+  OwnerForID: any;  
+  UserEncontrado = false;
   idOwner = '';
   constructor(private owners: OwnersService) {
 
@@ -30,10 +32,12 @@ export class OwnersListComponent implements OnInit {
   ngOnInit() {}
 
 
-  verForId(){
-    this.owners.getOWNERID(this.idOwner).subscribe((data: any)=>{
-      this.OwnerForID = data;
-      console.log(this.OwnersUsers);
+  verForId(idOwner: NgForm){
+    this.owners.getOWNERID(idOwner.value.idOwn).subscribe((data: any)=>{
+      
+      this.OwnerForID = data._embedded.owners;
+      console.log(this.OwnerForID );
        });
+       //console.log(idOwner.value.idOwn)
   }
 }

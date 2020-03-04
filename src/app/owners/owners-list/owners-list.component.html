@@ -1,39 +1,50 @@
-
-  <table class="example-full-width" cellspacing="0"><tr>
-    <td><mat-form-field class="example-full-width">
-      <mat-label>First name</mat-label>
-      <input matInput [(ngModel)]="idOwner" >
-    </mat-form-field></td>   
-  </tr></table>
-
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Buscar
-  </button>
-
-  
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" (click)="verForId()">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" *ngFor="let Owner of OwnerForID">
-        <div class="modal-header" >
-          <h5 class="modal-title" id="exampleModalLabel">{{Owner.dni}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <h1>{{Owners.name}}</h1>
-            <img src="../../../assets/user.png" alt="Photo of a Shiba Inu">
-            <h2>{{Owners.profession}}</h2>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
+<!-- <form #idOwner="ngForm" (ngSubmit)="onSubmit(idOwner)">
+    <div class="form-group">
+        <label for="bucarinput">Buscar por identificación</label>
+        <input type="number" class="form-control" id="bucarinput" aria-describedby="emailHelp" name="idOwn" ngModel required #idOwn="ngModel">
     </div>
-  </div>
-  
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Buscar</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngFor="let Ownerid of OwnerForID">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{Ownerid.dni}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+                </div>
+                <div class="modal-body">
+                    <h1>{{Ownerid.name}}</h1>
+                    <img src="../../../assets/user.png" alt="Photo of a Shiba Inu">
+                    <h2>{{Ownerid.profession}}</h2>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> -->
+
+<form #idOwner="ngForm" (ngSubmit)="verForId(idOwner)" novalidate>
+    <input name="idOwn" ngModel required #idOwn="ngModel">
+    <input name="last" ngModel>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+</form>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body" *ngFor="let Ownerid of OwnerForID">
+        <h5 class="card-title">{{Ownerid.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{Ownerid.dni}}</h6>
+        <p class="card-text">{{Ownerid.profession}}</p>
+
+    </div>
+</div>
+
+
+
 
 <div class="Contenedores-Propi">
     <mat-card class="example-card" *ngFor="let Owners of OwnersUsers">
