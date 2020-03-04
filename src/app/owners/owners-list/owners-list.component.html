@@ -1,37 +1,6 @@
-<!-- <form #idOwner="ngForm" (ngSubmit)="onSubmit(idOwner)">
-    <div class="form-group">
-        <label for="bucarinput">Buscar por identificación</label>
-        <input type="number" class="form-control" id="bucarinput" aria-describedby="emailHelp" name="idOwn" ngModel required #idOwn="ngModel">
-    </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Buscar</button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngFor="let Ownerid of OwnerForID">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{Ownerid.dni}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-                </div>
-                <div class="modal-body">
-                    <h1>{{Ownerid.name}}</h1>
-                    <img src="../../../assets/user.png" alt="Photo of a Shiba Inu">
-                    <h2>{{Ownerid.profession}}</h2>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form> -->
-
 <form #idOwner="ngForm" (ngSubmit)="verForId(idOwner)" novalidate>
     <input name="idOwn" ngModel required #idOwn="ngModel">
-    <input name="last" ngModel>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+    <button class="btn btn-primary">Submit</button>
 </form>
 
 <div class="card" style="width: 18rem;">
@@ -43,25 +12,22 @@
     </div>
 </div>
 
+<button type="button" class="btn btn-primary btn-sm" (click)="gotoCreate()">Agregar propietario</button>
 
 
 
-<div class="Contenedores-Propi">
-    <mat-card class="example-card" *ngFor="let Owners of OwnersUsers">
-        <mat-card-header>
-            <mat-card-title>
-                <h1>{{Owners.name}}</h1>
-            </mat-card-title>
-            <mat-card-subtitle>
-                <h2>{{Owners.profession}}</h2>
-            </mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../../assets/user.png" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-            <h3><b>Identificación: </b>{{Owners.dni}}</h3>
-        </mat-card-content>
-        <mat-card-actions>
-            <button class="button-ac" mat-button>EDITAR PROPIETARIO</button>
-        </mat-card-actions>
-    </mat-card>
+<div class="card-columns">
+    <div class="card" *ngFor="let Owners of OwnersUsers">
+        <img src="../../../assets/user.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{Owners.name}}</h5>
+            <p class="card-text">{{Owners.profession}}</p>
+            <h3><b>Identificación: </b>
+                <p>{{Owners.dni}}</p>
+            </h3>
+            <button type="button" class="btn btn-primary btn-sm" (click)="remove(Owners._links.self.href)">Eliminar propietario</button>
+
+
+        </div>
+    </div>
 </div>

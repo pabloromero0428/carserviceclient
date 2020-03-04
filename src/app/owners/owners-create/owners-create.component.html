@@ -1,1 +1,16 @@
-<p>owners-create works!</p>
+<form class="w-50 p-3" #addOwner="ngForm" (ngSubmit)="adicionarOwner(addOwner.value)" novalidate>
+
+    <label for=" identificacionOwner ">Identificacion</label>
+    <input name="dni" [(ngModel)]="owner.dni" type="text " class="form-control " id="identificacionOwner ">
+
+
+    <label for="nombreOwner ">Profesion</label>
+    <input name="profession" [(ngModel)]="owner.profession" type="text " class="form-control " id="nombreOwner ">
+
+
+    <label for="nombreOwner ">Nombre</label>
+    <input name="name" [(ngModel)]="owner.name" type="text " class="form-control " id="nombreOwner ">
+
+
+    <button type="submit " class="btn btn-primary ">Submit</button>
+</form>

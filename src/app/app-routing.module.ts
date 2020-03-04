@@ -4,6 +4,7 @@ import { CarListComponent } from './car-list/car-list.component';
 import { CarEditComponent } from './car-edit/car-edit.component';
 import { HomeClientComponent } from './home-client/home-client.component';
 import { OwnersListComponent } from './owners/owners-list/owners-list.component';
+import { OwnersCreateComponent} from './owners/owners-create/owners-create.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'Home',
     component:  HomeClientComponent
+  },
+
+  {
+    path: 'Create-propietario',
+    component: OwnersCreateComponent
   },
 ];
 
