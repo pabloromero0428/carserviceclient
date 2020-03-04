@@ -16,13 +16,13 @@ export class OwnersService {
   constructor(private http: HttpClient, private route: ActivatedRoute,
     private router: Router) {}
   dataOwners: any = [];
+  OwnerEdit= "";
 
   getOWNERS(): Observable<any> {
     return this.http.get(this.OWNERS_API).pipe(
       map((data: any) => {
         console.log(data);
         return data._embedded.owners;
-
       })
     );
   }
@@ -33,13 +33,13 @@ export class OwnersService {
 
   saveOwner(owner: any): Observable<any> {
     let result: Observable<Object>;
-    if (owner['dni']) {
+    if (owner['href']) {
       result = this.http.put(owner.href, owner);
     } else {
       result = this.http.post(this.OWNERS_API, owner);
     }
     return result;
-  }
+  } 
 
   removeOwner(dni: string) {
     return this.http.delete(dni);
@@ -49,4 +49,7 @@ export class OwnersService {
     this.router.navigate(['/propietarios']);
   }
 
+  gotoeditOwner() {
+    this.router.navigate(['/Edit-Prop']);
+  }
 }

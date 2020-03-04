@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OwnersService } from '../../shared/owners/owners.service';
 
 @Component({
   selector: 'app-owners-edit',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnersEditComponent implements OnInit {
 
-  constructor() { }
+  dni = "";
+  OwnerForID: any = [];
+  constructor(private owners: OwnersService) {
+
+    this.dni = this.owners.OwnerEdit;
+    this.owners.getOWNERID(this.dni).subscribe((data: any) => {
+      this.OwnerForID = data;
+      console.log(this.OwnerForID);
+    });
+  }
+
+
 
   ngOnInit() {
   }
+
+
 
 }

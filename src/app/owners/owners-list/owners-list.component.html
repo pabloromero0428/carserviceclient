@@ -25,6 +25,8 @@
             <h3><b>Identificación: </b>
                 <p>{{Owners.dni}}</p>
             </h3>
+            <button type="button" class="btn btn-primary btn-sm" (click)="gotoedit(Owners.dni)">Editar propietario</button>
+
             <button type="button" class="btn btn-primary btn-sm" (click)="remove(Owners._links.self.href)">Eliminar propietario</button>
 
 

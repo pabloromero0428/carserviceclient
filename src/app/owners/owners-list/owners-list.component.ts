@@ -38,8 +38,7 @@ export class OwnersListComponent implements OnInit {
   }
 
   verForId(idOwner: NgForm){
-    this.owners.getOWNERID(idOwner.value.idOwn).subscribe((data: any)=>{
-      
+    this.owners.getOWNERID(idOwner.value.idOwn).subscribe((data: any)=>{      
       this.OwnerForID = data._embedded.owners;
       console.log(this.OwnerForID );
        });
@@ -51,5 +50,10 @@ export class OwnersListComponent implements OnInit {
     this.owners.removeOwner(href).subscribe(result => {
       this.owners.gotoListOwner();
      }, error => console.error(error));
+  }
+
+  gotoedit(dni){
+    this.owners.OwnerEdit = dni;
+    this.owners.gotoeditOwner();
   }
 }
