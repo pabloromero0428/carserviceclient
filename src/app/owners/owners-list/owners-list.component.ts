@@ -24,6 +24,7 @@ export class OwnersListComponent implements OnInit {
     this.owners.getOWNERS().subscribe((data: any) =>{
       this.OwnersUsers = data;
       console.log(this.OwnersUsers);
+     
     });
 
     

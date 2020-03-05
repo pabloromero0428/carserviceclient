@@ -1,31 +1,13 @@
-<!-- <form class="w-50 p-3" #editarOwner="ngForm" (ngSubmit)="editOwner(editarOwner.value)" novalidate *ngFor="let owneredit of OwnerForID">
-
-    <label for=" identificacionOwner ">Identificacion</label>
-    <input name="dni" [(ngModel)]="owner.dni" type="text " class="form-control " id="identificacionOwner" value="{{owneredit.dni}}" required>
-
-
-    <label for="nombreOwner ">Profesion</label>
-    <input name="profession" [(ngModel)]="owner.profession" type="text " class="form-control " id="nombreOwner" placeholder="{{owneredit.profession}}">
-
-
-    <label for="nombreOwner ">Nombre</label>
-    <input name="name" [(ngModel)]="owner.name" type="text " class="form-control " id="nombreOwner " placeholder="{{owneredit.name}}">
-
-
-    <button type="submit " class="btn btn-primary ">Submit</button>
-</form> -->
-
-<form class="w-50 p-3" #editarOwner="ngForm" (ngSubmit)="editOwner(editarOwner.value)" novalidate *ngFor="let owneredit of OwnerForID">
-
+<form class="w-50 p-3" #editarOwner="ngForm" (ngSubmit)="editOwner(editarOwner.value)" novalidate>
 
     <label for="identificacionOwner">Identificación</label>
-    <input type="number" class="form-control " id="identificacionOwner" ngModel value="{{owneredit.dni}}" required>
+    <input type="number" class="form-control " id="identificacionOwner" [(ngModel)]="OwnerForID.dni" required name="dni" #dni>
 
     <label for="validationDefault02">Last name</label>
-    <input type="text" class="form-control" id="validationDefault02" ngModel value="{{owneredit.profession}}" required>
+    <input type="text" class="form-control" id="validationDefault02" [(ngModel)]="OwnerForID.profession" name="profession" #profession required>
 
     <label for="validationDefault02">Last name</label>
-    <input type="text" class="form-control" id="validationDefault02" ngModel value="{{owneredit.name}}" required>
+    <input type="text" class="form-control" id="validationDefault02" [(ngModel)]="OwnerForID.name" name="name" #name required>
 
     <button class="btn btn-primary" type="submit">Submit form</button>
 </form>

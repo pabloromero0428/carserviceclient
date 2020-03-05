@@ -31,6 +31,10 @@ export class OwnersService {
     return this.http.get(this.OWNERS_APIID + '=' + id);
   }
 
+  getOWNERFORID(id: string) {
+    return this.http.get(this.OWNERS_API + '/' + id);
+  }
+
   saveOwner(owner: any): Observable<any> {
     let result: Observable<Object>;
     if (owner['href']) {

@@ -18,6 +18,7 @@ export class CarListComponent implements OnInit {
         console.log(data);
       this.cars = data;
       for (const car of this.cars) {
+          console.log("El id es"+car.id)
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
       }
     });

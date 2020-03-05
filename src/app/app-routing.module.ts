@@ -41,7 +41,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'Edit-Prop',
+    path: 'Edit-Prop/:id',
     component: OwnersEditComponent
   },
 ];
