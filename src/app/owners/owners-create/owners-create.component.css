@@ -1,0 +1,14 @@
+.contenedor {
+    width: 50%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    border: solid 1px #282829;
+    border-radius: 12px;
+    margin-top: 2em;
+    padding: 3em;
+}
+
+.btn-aceptar {
+    margin-top: 2em;
+}

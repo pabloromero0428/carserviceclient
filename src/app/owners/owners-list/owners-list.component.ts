@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { from } from "rxjs";
 import { OwnersService } from "../../shared/owners/owners.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { CarService } from "../../shared/car/car.service";
 
 @Component({
   selector: "app-owners-list",
@@ -11,6 +12,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class OwnersListComponent implements OnInit {
   OwnersUsers: any[] = [];
+  cars: any[] = [];
   OwnerForID: any;
   UserEncontrado = false;
   referencia = "";
@@ -18,7 +20,8 @@ export class OwnersListComponent implements OnInit {
   constructor(
     private owners: OwnersService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private carService: CarService
   ) {
     this.owners.getOWNERS().subscribe((data: any) => {
       this.OwnersUsers = data;
@@ -44,13 +47,29 @@ export class OwnersListComponent implements OnInit {
     console.log("//");
     console.log(this.miDataInterior);
 
+
     for (let index = 0; index < this.miDataInterior.length; index++) {
       this.referencia = this.miDataInterior[index]._links.self.href;
-         this.owners.removeOwner( this.referencia).subscribe(result => {
-          }, error => console.error(error));
+      this.owners.removeOwner(this.referencia).subscribe(
+        result => {},
+        error => console.error(error)
+      );
+      this.quitarRelacion(this.miDataInterior[index].dni);
     }
     this.miDataInterior = [];
     location.reload();
+  }
+
+  quitarRelacion(dni: string){
+    this.carService.getAll().subscribe(data => {
+      let cars = data;
+      cars.forEach(carAux => {
+        if (carAux.ownerDni == dni) {
+          carAux.ownerDni = null;
+          this.carService.save(carAux).subscribe(result => { }, error => console.error(error));
+        }
+      });
+    });
   }
 
   gotoCreate() {
@@ -65,16 +84,7 @@ export class OwnersListComponent implements OnInit {
     //console.log(idOwner.value.idOwn)
   }
 
-  remove(href) {
-    console.log(href);
-    this.owners.removeOwner(href).subscribe(
-      result => {
-        this.owners.gotoListOwner();
-        location.reload();
-      },
-      error => console.error(error)
-    );
-  }
+
 
   gotoedit(dni) {
     this.owners.OwnerEdit = dni;
