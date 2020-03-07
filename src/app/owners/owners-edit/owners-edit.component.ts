@@ -1,72 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { OwnersService } from '../../shared/owners/owners.service';
-import { NgForm, FormBuilder, FormsModule, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-
-
+import { Component, OnInit } from "@angular/core";
+import { OwnersService } from "../../shared/owners/owners.service";
+import { NgForm, FormBuilder, FormsModule, FormGroup } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-owners-edit',
-  templateUrl: './owners-edit.component.html',
-  styleUrls: ['./owners-edit.component.css']
+  selector: "app-owners-edit",
+  templateUrl: "./owners-edit.component.html",
+  styleUrls: ["./owners-edit.component.css"]
 })
-
-
 export class OwnersEditComponent implements OnInit {
-
-
   dni = "";
   OwnerForID: any = {};
-  hrefOwner: any = {};
+  hrefOwner = "";
   subOwner: any = {};
   sub: Subscription;
   owner: any = {};
+  tamañohref: number;
 
-  constructor(private owners: OwnersService, private route: ActivatedRoute,
-    private router: Router, ) {
+  idOwner = "";
 
-     this.dni = this.owners.OwnerEdit;
-     this.owners.getOWNERID(this.dni).subscribe((data: any) => {
-       this.subOwner = data._embedded.owners[0];
-       this.hrefOwner = this.subOwner._links.self.href
+  constructor(
+    private owners: OwnersService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.dni = this.owners.OwnerEdit;
+    this.owners.getOWNERID(this.dni).subscribe((data: any) => {
+      this.subOwner = data._embedded.owners[0];
+      this.hrefOwner = this.subOwner._links.self.href;
 
-       console.log("este es el owner")
-       console.log(this.hrefOwner);
-     });
+      this.tamañohref = this.hrefOwner.length;
 
+      var i = this.tamañohref;
+      var identificador: boolean = false;
 
+      while (identificador == false || i == 0) {
+        const letra = this.hrefOwner.charAt(i);
+        if (letra == "/") {
+          identificador = true;
+          i = i + 1;
+          this.idOwner = this.hrefOwner.substring(i, this.tamañohref);
+          console.log("id = " + this.idOwner);
+        } else {
+          i = i - 1;
+        }
+      }
 
-     this.sub = this.hrefOwner.params.subscribe(params => {
-       const a= this.sub;
-       
-      //  const id = params['id'];
-      const id = '24';
-       if (id) {
-         this.owners.getOWNERFORID(id).subscribe((data: any) => {
-           if (data) {
-             this.OwnerForID = data;
-             console.log("//");
-             console.log(this.OwnerForID);
-           } else {
-             console.log(`Car with id '${id}' not found, returning to list`);
-           }
-         });
-       }
-     });
+      console.log("owner id" + this.idOwner);
+      if (this.idOwner) {
+        this.owners.getOWNERFORID(this.idOwner).subscribe((data: any) => {
+          if (data) {
+            this.OwnerForID = data;
+            console.log("//");
+            console.log(this.OwnerForID);
+          } else {
+            console.log(
+              `Car with id '${this.idOwner}' not found, returning to list`
+            );
+          }
+        });
+      }
+    });
   }
 
   editOwner(editOwner: NgForm) {
-    //console.log(editOwner);
+    console.log(editOwner);
+    this.owners.editarOwner(editOwner, this.hrefOwner ).subscribe(
+      (data: any) => {
+        this.owners.gotoListOwner();
+      },
+      error => console.error(error)
+    );
   }
 
-  ngOnInit() {
-
-
-
-
-  }
-
-
-
+  ngOnInit() {}
 }

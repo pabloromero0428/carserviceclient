@@ -1,35 +1,57 @@
-<form #idOwner="ngForm" (ngSubmit)="verForId(idOwner)" novalidate>
-    <input name="idOwn" ngModel required #idOwn="ngModel">
-    <button class="btn btn-primary">Submit</button>
-</form>
+<div class="container">
+    <form #idOwner="ngForm" class="form-buscar" (ngSubmit)="verForId(idOwner)" novalidate>
+        <h3>Buscar usuario por dni</h3>
+        <div><input class="form-control input-buscar" name="idOwn" ngModel required #idOwn="ngModel"></div>
+        <button class="btn btn-primary btn-buscar" data-toggle="modal" data-target="#exampleModal">Buscar</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" *ngFor="let Ownerid of OwnerForID">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nombre: {{Ownerid.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Identificación: {{Ownerid.dni}}</h6>
+                        <p class="card-text">Profesión: {{Ownerid.profession}}</p>
 
-<div class="card" style="width: 18rem;">
-    <div class="card-body" *ngFor="let Ownerid of OwnerForID">
-        <h5 class="card-title">{{Ownerid.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{Ownerid.dni}}</h6>
-        <p class="card-text">{{Ownerid.profession}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
+
+
+    <div>
+        <button type="button" class="btn btn-primary btn-sm btn-agregar" (click)="gotoCreate()">Agregar propietario</button>
     </div>
+
 </div>
 
-<button type="button" class="btn btn-primary btn-sm" (click)="gotoCreate()">Agregar propietario</button>
+<div class="modal-body contenedor">
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" targetas" *ngFor="let data of OwnersUsers">
 
+                <input class="form-check-input " type="checkbox" name="miDataInterior" (change)="$event.target.checked ? agregar1(data) : quitar1(data)">
+                <label class="form-check-label" for="inlineCheckbox1">{{data.dni}}</label>
+                <br>
+                <h2>{{data.name}}</h2>
+                <h4>{{data.profession}}</h4>
 
+                <button type="button" class="btn btn-primary btn-sm btn-list" (click)="gotoedit(data.dni)">Editar propietario</button>
 
-<div class="card-columns">
-    <div class="card" *ngFor="let Owners of OwnersUsers">
-        <img src="../../../assets/user.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{Owners.name}}</h5>
-            <p class="card-text">{{Owners.profession}}</p>
-            <h3><b>Identificación: </b>
-                <p>{{Owners.dni}}</p>
-            </h3>
-            <button type="button" class="btn btn-primary btn-sm" (click)="gotoedit(Owners.dni)">Editar propietario</button>
+                <button type="button" class="btn btn-primary btn-sm btn-list" (click)="remove(data._links.self.href)">Eliminar propietario</button>
 
-            <button type="button" class="btn btn-primary btn-sm" (click)="remove(Owners._links.self.href)">Eliminar propietario</button>
+            </div>
 
 
         </div>
     </div>
+
+    <button type="button" class="btn btn-primary btn-sm btn-list button-El" (click)=" Eliminar()">Eliminar</button>
 </div>
