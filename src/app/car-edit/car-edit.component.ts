@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
 import { NgForm } from '@angular/forms';
+import { OwnersService } from "../shared/owners/owners.service";
+
 
 @Component({
   selector: 'app-car-edit',
@@ -12,16 +14,19 @@ import { NgForm } from '@angular/forms';
 })
 export class CarEditComponent implements OnInit, OnDestroy {
   car: any = {};
-
+  OwnersUsers: any[] = [];
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private carService: CarService,
-              private giphyService: GiphyService) {
+              private giphyService: GiphyService,
+              private owners: OwnersService) {
+                this.getOwners();
   }
 
   ngOnInit() {
+
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
@@ -36,6 +41,14 @@ export class CarEditComponent implements OnInit, OnDestroy {
           }
         });
       }
+    });
+  }
+
+  getOwners(){
+    this.owners.getOWNERS().subscribe((data: any) => {
+      this.OwnersUsers = data;
+      console.log("//")
+      console.log(this.OwnersUsers)
     });
   }
 
